@@ -7,4 +7,4 @@ luma.oled==3.3.0
 lxml==4.3.2
 spidev==3.4
 RPi.GPIO==0.7.0
-pygame==1.9.4.post1
+pygame==2.0.0.dev6
