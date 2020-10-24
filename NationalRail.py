@@ -3,7 +3,6 @@
 # Documentation   : https://jonathanfoot.com/Projects/DepartureBoard
 # Description     : This program allows you to display a live train departure board for any UK station nationally, excluding the London Underground.
 
-import urllib2
 import time
 import math
 import inspect,os
