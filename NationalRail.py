@@ -68,6 +68,7 @@ parser.add_argument("--FixNextToArrive",dest='FixToArrive', action='store_true',
 parser.add_argument('--no-splashscreen', dest='SplashScreen', action='store_false',help="Do you wish to see the splash screen at start up; recommended and on by default.")
 parser.add_argument("--Display", default="ssd1322", choices=['ssd1322','pygame','capture','gifanim'], help="Used for development purposes, allows you to switch from a physical display to a virtual emulated one; default 'ssd1322'")
 parser.add_argument("--max-frames", default=60,dest='maxframes', type=check_positive, help="Used only when using gifanim emulator, sets how long the gif should be.")
+parser.add_argument("--ExcludedDestinations", default="", help="List any Destinations you do not wish to view. Make sure to capitalise correctly and simply put a single space between each; default is nothing, ie show every destination.",  nargs='*')
 
 # Defines the required paramaters
 requiredNamed = parser.add_argument_group('required named arguments')
@@ -224,6 +225,8 @@ class LiveTime(object):
 
             for serviceC in board.train_services:
                 if len(services) >= Args.NumberOfCards:
+                    break
+                if str(serviceC.destination_text).split("via")[0] in Args.ExcludedDestinations:
                     break
                 service = darwin_sesh.get_service_details(serviceC.service_id)
                 if service.sta != None and str(service.platform) not in Args.ExcludedPlatforms:
